@@ -56,13 +56,16 @@ public class AuthController {
         if (usuarioService.existsByEmail(nomUsuario.getEmail())) {
             return new ResponseEntity<>("Ese email ya existe", HttpStatus.BAD_REQUEST);
         }
+        Usuario usuario = Usuario
+                .builder()
+                .id(0)
+                .nombre(nomUsuario.getNombre())
+                .nomUsuario(nomUsuario.getNombre())
+                .correo(nomUsuario.getEmail())
+                .password(encoder.encode(nomUsuario.getPassword()))
 
-        Usuario usuario = new Usuario(0
-                , nomUsuario.getNombre()
-                , nomUsuario.getNomUsuario()
-                , nomUsuario.getEmail()
-                , encoder.encode(nomUsuario.getPassword())
-                , null);
+                .build();
+
 
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getByRolNombre(RolNombre.ROL_USER).get());

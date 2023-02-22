@@ -1,5 +1,4 @@
-package com.g4.dev.esportlancentersw.security.model;
-
+package com.g4.dev.esportlancentersw.model;
 
 import com.g4.dev.esportlancentersw.util.ValidationMessageConstants;
 import com.sun.istack.NotNull;
@@ -12,18 +11,17 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 @Entity
-public class Usuario {
+@Table
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long idCliente;
 
     @NotNull
     @Column(nullable = false)
@@ -46,24 +44,18 @@ public class Usuario {
     @Size(min = 9, max = 9, message = ValidationMessageConstants.TELEFONO)
     private String telefono;
 
+    @Column(nullable = false)
+    private Boolean esBloqueado;
 
     @NotNull
     @Column(unique = true , nullable = false)
     @NotBlank(message = ValidationMessageConstants.DNI_USUARIO)
     private String nomUsuario;
 
-
-
     @NotNull
     @Email(message = ValidationMessageConstants.CORREO)
     private String correo;
 
-    @NotNull
-    @Size(min = 5, max = 9, message = ValidationMessageConstants.PASSWORD_USUARIO)
-    private String password;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "usuario_rol",joinColumns = @JoinColumn(name = "usuario_id"),
-                    inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    private Set<Rol> roles = new HashSet<>();
+    @Column( nullable = false)
+    private Boolean estado;
 }
