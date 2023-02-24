@@ -36,7 +36,7 @@ public class Alquiler {
     private int tiempo;
 
     @Column(nullable = false)
-    private Double Monto;
+    private Double monto;
 
     @Column(nullable = false)
     private Boolean estado;
