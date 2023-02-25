@@ -24,7 +24,6 @@ public class JwtEntryPoint  implements AuthenticationEntryPoint {
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
 
-        log.error("Fail en el método commence -> ");
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                 "Request no authorized!");
 

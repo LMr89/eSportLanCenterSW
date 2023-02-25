@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -34,7 +35,7 @@ public class Usuario {
     @NotBlank(message = ValidationMessageConstants.APELLIDO_USUARIO)
     private  String apellido;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 8)
     @NotBlank(message = ValidationMessageConstants.DNI_USUARIO)
     private String dni;
 
@@ -58,8 +59,9 @@ public class Usuario {
     @Email(message = ValidationMessageConstants.CORREO)
     private String correo;
 
-    @NotNull
-    @Size(min = 5, max = 9, message = ValidationMessageConstants.PASSWORD_USUARIO)
+
+    @NotBlank( message = ValidationMessageConstants.PASSWORD_USUARIO)
+    @Nationalized
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

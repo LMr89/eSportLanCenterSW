@@ -22,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,7 +44,7 @@ public class AuthController {
 
 
     @PostMapping("/nuevo")
-    public ResponseEntity<?> nuevo(@RequestBody NuevoUsuario nomUsuario,
+    public ResponseEntity<?> nuevo(@Valid @RequestBody Usuario nomUsuario,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>("Compos mal puesto", HttpStatus.BAD_REQUEST);
@@ -53,19 +54,22 @@ public class AuthController {
         if (usuarioService.existsByNomUsuario(nomUsuario.getNomUsuario())) {
             return new ResponseEntity<>("Ese nombre ya existe", HttpStatus.BAD_REQUEST);
         }
-        if (usuarioService.existsByEmail(nomUsuario.getEmail())) {
+        if (usuarioService.existsByEmail(nomUsuario.getCorreo())) {
             return new ResponseEntity<>("Ese email ya existe", HttpStatus.BAD_REQUEST);
         }
-        Usuario usuario = Usuario
-                .builder()
-                .id(0)
-                .nombre(nomUsuario.getNombre())
-                .nomUsuario(nomUsuario.getNombre())
-                .correo(nomUsuario.getEmail())
-                .password(encoder.encode(nomUsuario.getPassword()))
+        /**
+         * Usuario usuario = Usuario
+         *                 .builder()
+         *                 .id(0)
+         *                 .nombre(nomUsuario.getNombre())
+         *                 .nomUsuario(nomUsuario.getNombre())
+         *                 .correo(nomUsuario.getEmail())
+         *                 .password(encoder.encode(nomUsuario.getPassword()))
+         *
+         *                 .build();
+         */
 
-                .build();
-
+        nomUsuario.setPassword(encoder.encode(nomUsuario.getPassword()));
 
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getByRolNombre(RolNombre.ROL_USER).get());
@@ -73,8 +77,8 @@ public class AuthController {
             roles.add(rolService.getByRolNombre(RolNombre.ROL_ADMIN).get());
 
         }
-        usuario.setRoles(roles);
-        usuarioService.saveUsuario(usuario);
+        nomUsuario.setRoles(roles);
+        usuarioService.saveUsuario(nomUsuario);
         return new ResponseEntity<>("Usuario guardado", HttpStatus.CREATED);
     }
 

@@ -7,7 +7,7 @@ public class ValidationMessageConstants {
 
 
     //Producto
-    public  final static String PRODUCTO_NOMBRE_NO_BLANCO = "Nombre de producto faltante";
+    public  final static String PRODUCTO_NOMBRE_NO_BLANCO = "Nombre de producto no debe estar vacio";
     public  final static String PROVEDOR_PRODCUCTO_MSG = "Proveedor faltante";
     public  final static String CATEGORIA_PRODUCTO_MSG = "Categoria no debe estar vacio";
     public  final static String PRECIO_UNITARIO_MSG = "No se indico el precio unitario";
