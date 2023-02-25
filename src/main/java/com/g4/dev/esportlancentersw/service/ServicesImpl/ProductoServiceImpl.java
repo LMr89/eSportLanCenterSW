@@ -7,7 +7,9 @@ import com.g4.dev.esportlancentersw.service.IServices.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +40,7 @@ public class ProductoServiceImpl implements IProductoService {
         return productoRepository.findAll(p);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @Override
     public Producto registrarEntidad(Producto entidad) {
         entidad.setEstado(true);
