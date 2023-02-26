@@ -1,13 +1,11 @@
 package com.g4.dev.esportlancentersw.controller.adviceController;
 
 import com.g4.dev.esportlancentersw.DTO.response.ErrorResponseDTO;
-import com.g4.dev.esportlancentersw.exception.CorreoRepeatedException;
-import com.g4.dev.esportlancentersw.exception.DniRepeatedException;
-import com.g4.dev.esportlancentersw.exception.NotFoundException;
-import com.g4.dev.esportlancentersw.exception.TelephoneRepeatedException;
-import com.g4.dev.esportlancentersw.exception.producto.ProductoNotFoundException;
+import com.g4.dev.esportlancentersw.exception.common.CorreoRepeatedException;
+import com.g4.dev.esportlancentersw.exception.common.DniRepeatedException;
+import com.g4.dev.esportlancentersw.exception.common.NotFoundException;
+import com.g4.dev.esportlancentersw.exception.common.TelephoneRepeatedException;
 import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestControllerAdvice

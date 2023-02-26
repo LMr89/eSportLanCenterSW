@@ -1,4 +1,4 @@
-package com.g4.dev.esportlancentersw.exception;
+package com.g4.dev.esportlancentersw.exception.pedidoCompra;
 
 import com.g4.dev.esportlancentersw.util.ValidationMessageConstants;
 

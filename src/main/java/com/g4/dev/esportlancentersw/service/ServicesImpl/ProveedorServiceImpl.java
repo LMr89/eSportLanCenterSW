@@ -1,6 +1,6 @@
 package com.g4.dev.esportlancentersw.service.ServicesImpl;
 
-import com.g4.dev.esportlancentersw.exception.NotFoundException;
+import com.g4.dev.esportlancentersw.exception.common.NotFoundException;
 import com.g4.dev.esportlancentersw.exception.proveedor.ProveedorNomContactoRepeatedException;
 import com.g4.dev.esportlancentersw.model.Proveedor;
 import com.g4.dev.esportlancentersw.repository.ProveedorRepository;

@@ -1,9 +1,9 @@
 package com.g4.dev.esportlancentersw.service.ServicesImpl;
 
-import com.g4.dev.esportlancentersw.exception.CorreoRepeatedException;
-import com.g4.dev.esportlancentersw.exception.DniRepeatedException;
-import com.g4.dev.esportlancentersw.exception.NotFoundException;
-import com.g4.dev.esportlancentersw.exception.TelephoneRepeatedException;
+import com.g4.dev.esportlancentersw.exception.common.CorreoRepeatedException;
+import com.g4.dev.esportlancentersw.exception.common.DniRepeatedException;
+import com.g4.dev.esportlancentersw.exception.common.NotFoundException;
+import com.g4.dev.esportlancentersw.exception.common.TelephoneRepeatedException;
 import com.g4.dev.esportlancentersw.exception.cliente.ClienteNameExistsException;
 import com.g4.dev.esportlancentersw.model.Cliente;
 import com.g4.dev.esportlancentersw.repository.ClienteRepository;

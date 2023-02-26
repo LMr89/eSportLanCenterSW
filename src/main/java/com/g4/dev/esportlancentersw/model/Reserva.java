@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 
 @AllArgsConstructor
@@ -28,26 +29,26 @@ public class Reserva {
     private Calendar fecha;
 
     @Column(nullable = false)
-    @NotBlank(message = ValidationMessageConstants.TIEMPO_RESERVA)
+    @NotNull(message = ValidationMessageConstants.TIEMPO_RESERVA)
     private int tiempo;
 
-    @NotBlank(message = ValidationMessageConstants.ORDENADOR_RESERVA)
+    @NotNull(message = ValidationMessageConstants.ORDENADOR_RESERVA)
     @ManyToOne
     @JoinColumn(nullable = false, name = "idOrdernador")
     private Ordenador idOrdenador;
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "idCliente")
-    @NotBlank(message = ValidationMessageConstants.CLIENTE_RESERVA)
+    @NotNull(message = ValidationMessageConstants.CLIENTE_RESERVA)
     private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "idUsuario")
-    @NotBlank(message = ValidationMessageConstants.USUARIO_RESERVA)
+    @NotNull(message = ValidationMessageConstants.USUARIO_RESERVA)
     private Usuario idUsuario;
 
     @Column(nullable = false)
-    @NotBlank(message = ValidationMessageConstants.MONTO_RESERVA)
+    @NotNull(message = ValidationMessageConstants.MONTO_RESERVA)
     private Double monto;
 
     @Column(nullable = false)

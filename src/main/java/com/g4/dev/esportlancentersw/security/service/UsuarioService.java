@@ -1,8 +1,8 @@
 package com.g4.dev.esportlancentersw.security.service;
 
 
-import com.g4.dev.esportlancentersw.exception.DniRepeatedException;
-import com.g4.dev.esportlancentersw.exception.NotFoundException;
+import com.g4.dev.esportlancentersw.exception.common.DniRepeatedException;
+import com.g4.dev.esportlancentersw.exception.common.NotFoundException;
 import com.g4.dev.esportlancentersw.exception.usuario.UsuarioNomUsuarioRepeatedException;
 import com.g4.dev.esportlancentersw.security.enums.RolNombre;
 import com.g4.dev.esportlancentersw.security.model.Rol;

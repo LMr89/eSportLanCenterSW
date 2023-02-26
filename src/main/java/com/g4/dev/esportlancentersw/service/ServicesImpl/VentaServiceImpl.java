@@ -1,6 +1,6 @@
 package com.g4.dev.esportlancentersw.service.ServicesImpl;
 
-import com.g4.dev.esportlancentersw.exception.NotFoundException;
+import com.g4.dev.esportlancentersw.exception.common.NotFoundException;
 import com.g4.dev.esportlancentersw.exception.producto.ProductoNoEnoughStockException;
 import com.g4.dev.esportlancentersw.model.DetalleVenta;
 import com.g4.dev.esportlancentersw.model.Venta;

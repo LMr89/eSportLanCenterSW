@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @AllArgsConstructor
@@ -32,11 +34,17 @@ public class Ordenador {
 
     @Column(nullable = false, unique = true)
     @NotBlank(message = ValidationMessageConstants.IP_ORDENADOR)
+    @Pattern(regexp = "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+    ,message = ValidationMessageConstants.IP_ORDENADOR_NO_VALIDO)
     private String ipOrdenador;
 
     @Column(nullable = false)
-    @NotBlank(message = ValidationMessageConstants.NUM_ORDENADOR)
+    @NotNull(message = ValidationMessageConstants.NUM_ORDENADOR)
     private int numOrdenador;
+
+
+    @Column(nullable = false)
+    private Boolean mantenimiento;
 
     @Column(nullable = false)
     private Boolean estado;

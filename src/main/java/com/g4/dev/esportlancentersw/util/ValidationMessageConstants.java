@@ -34,6 +34,7 @@ public class ValidationMessageConstants {
     public static final  String NOM_ORDENADOR ="Es obligatorio el nombre del ordenador";
     public static final  String CARACTERISTICAS_ORDENADOR = "Faltan las caracteristicas";
     public static final  String IP_ORDENADOR = "Es obligatorio poner la ip del ordenador";
+    public static final  String IP_ORDENADOR_NO_VALIDO = "La ip del ordenador no es valida, ejemplo: 192.168.21.21";
     public static final  String NUM_ORDENADOR = "Es obligatorio darle un numero de orden al ordenador";
 
 
@@ -65,7 +66,7 @@ public class ValidationMessageConstants {
     public static final  String CORREO = "El correo es obligatorio";
     public static final  String TELEFONO = "El telefono es de solo 9 digitos";
     public static final  String FECHA = "Es obligatorio poner la fecha";
-    public static final  String NOMBRE_CORTO = "El nombre introducido es corto";
+    public static final  String NOMBRE_CORTO = "El nombre introducido es tiene mas de 10 caracteres";
 
 
     public static final String PAGINA_WEB_MAL_FORMADA = "Se ha ingresado una url web no valida";

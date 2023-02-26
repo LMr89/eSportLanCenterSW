@@ -1,4 +1,4 @@
-package com.g4.dev.esportlancentersw.exception;
+package com.g4.dev.esportlancentersw.exception.common;
 
 public class TelephoneRepeatedException extends  RuntimeException{
 

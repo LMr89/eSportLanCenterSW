@@ -1,7 +1,7 @@
 package com.g4.dev.esportlancentersw.service.ServicesImpl;
 
-import com.g4.dev.esportlancentersw.exception.NotFoundException;
-import com.g4.dev.esportlancentersw.exception.PedidoCompraInvalidComprabanteException;
+import com.g4.dev.esportlancentersw.exception.common.NotFoundException;
+import com.g4.dev.esportlancentersw.exception.pedidoCompra.PedidoCompraInvalidComprabanteException;
 import com.g4.dev.esportlancentersw.exception.pedidoCompra.PedidoCanceledException;
 import com.g4.dev.esportlancentersw.model.PedidoCompra;
 import com.g4.dev.esportlancentersw.model.Producto;

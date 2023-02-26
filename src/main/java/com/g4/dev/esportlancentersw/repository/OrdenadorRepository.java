@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrdenadorRepository extends JpaRepository<Ordenador, Long> {
+    boolean existsByIpOrdenador(String ipOrdenador);
+    boolean existsByNomDispositivo(String nomDispositivo);
+    boolean existsByNumOrdenador(int num);
 }

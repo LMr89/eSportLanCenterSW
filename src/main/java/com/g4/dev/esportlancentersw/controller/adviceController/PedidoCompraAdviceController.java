@@ -2,7 +2,7 @@ package com.g4.dev.esportlancentersw.controller.adviceController;
 
 
 import com.g4.dev.esportlancentersw.DTO.response.ErrorResponseDTO;
-import com.g4.dev.esportlancentersw.exception.PedidoCompraInvalidComprabanteException;
+import com.g4.dev.esportlancentersw.exception.pedidoCompra.PedidoCompraInvalidComprabanteException;
 import com.g4.dev.esportlancentersw.exception.pedidoCompra.PedidoCanceledException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
