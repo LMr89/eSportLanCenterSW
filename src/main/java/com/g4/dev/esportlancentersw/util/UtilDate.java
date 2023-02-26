@@ -1,6 +1,7 @@
 package com.g4.dev.esportlancentersw.util;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class UtilDate {
@@ -11,5 +12,8 @@ public class UtilDate {
      */
     public static String getExactlyDate(){
        return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+    }
+    public  static Calendar getExactlyCalendar(){
+        return  Calendar.getInstance();
     }
 }

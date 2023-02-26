@@ -67,11 +67,13 @@ public class ControllerAdvice {
                 Collections.singletonList(ex.getMessage()));
         return  new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(Exception.class)
-    public  ResponseEntity< ErrorResponseDTO>  allExceptionsHandler(Exception ex){
-        ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.NOT_FOUND,
-                Collections.singletonList(ex.getMessage()));
-        return  new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
-    }
+    /**
+     * @ExceptionHandler(Exception.class)
+     *     public  ResponseEntity< ErrorResponseDTO>  allExceptionsHandler(Exception ex){
+     *         ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.NOT_FOUND,
+     *                 Collections.singletonList(ex.getMessage()));
+     *         return  new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
+     *     }
+     */
 
 }

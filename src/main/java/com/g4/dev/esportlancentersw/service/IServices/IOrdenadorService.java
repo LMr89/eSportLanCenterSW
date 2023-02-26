@@ -13,4 +13,6 @@ public interface IOrdenadorService extends IMainService<Ordenador> {
 
     List<Ordenador> ordenadoresEnMantenimiento();
 
+    boolean existsById(long id);
+
 }

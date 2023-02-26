@@ -93,4 +93,9 @@ public class ClienteServiceImpl implements IClienteService {
             throw  new ClienteNameExistsException();
         }
     }
+
+    @Override
+    public boolean existsById(long id) {
+        return clienteRepository.existsById(id);
+    }
 }

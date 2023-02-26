@@ -36,6 +36,7 @@ public class UsuarioService implements IUsuarioService {
         return usuarioRepository.findByNomUsuario(nomUsuario);
     }
 
+
     @Override
     public List<Usuario> listarDatos() {
         return usuarioRepository.findAll();
@@ -124,5 +125,10 @@ public class UsuarioService implements IUsuarioService {
         if (usuarioRepository.existsByNomUsuario(usu.getNomUsuario())) {
             throw new UsuarioNomUsuarioRepeatedException();
         }
+    }
+
+    @Override
+    public boolean existsById(long id) {
+        return usuarioRepository.existsById(id);
     }
 }

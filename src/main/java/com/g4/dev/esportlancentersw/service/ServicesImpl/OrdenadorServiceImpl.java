@@ -44,6 +44,11 @@ public class OrdenadorServiceImpl implements IOrdenadorService {
     }
 
     @Override
+    public boolean existsById(long id) {
+        return ordenadorRepository.existsById(id);
+    }
+
+    @Override
     public Optional<Ordenador> buscarEntidad(Long id) {
         Optional<Ordenador> foundedMachine = ordenadorRepository.findById(id);
         if (foundedMachine.isEmpty()){
