@@ -44,6 +44,7 @@ public class ValidationMessageConstants {
     public static final  String CLIENTE_RESERVA = "No se indico un cliente ";
     public static final  String USUARIO_RESERVA = "No se especifico el usuario de la reserva";
     public static final  String MONTO_RESERVA = "No se fijo el monto de la reserva";
+    public static final String NO_FECHA_INICIO_ESTABLECIDA = "Se debe establecer la fecha de inicio.";
 
     //pedido de compra
     public static final  String PRODUCTO_COMPRA = "Es obligatorio especificar los productos";
@@ -70,4 +71,5 @@ public class ValidationMessageConstants {
 
 
     public static final String PAGINA_WEB_MAL_FORMADA = "Se ha ingresado una url web no valida";
+
 }

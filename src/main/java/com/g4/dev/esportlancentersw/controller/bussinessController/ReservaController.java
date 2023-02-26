@@ -1,6 +1,7 @@
 package com.g4.dev.esportlancentersw.controller.bussinessController;
 
 import com.g4.dev.esportlancentersw.DTO.response.SuccessResponseDTO;
+import com.g4.dev.esportlancentersw.exception.common.NotImpletedException;
 import com.g4.dev.esportlancentersw.model.Cliente;
 import com.g4.dev.esportlancentersw.model.Reserva;
 import com.g4.dev.esportlancentersw.service.IServices.IClienteService;
@@ -64,14 +65,17 @@ public class ReservaController {
     @PutMapping("/{id}")
     public ResponseEntity<SuccessResponseDTO> modificarReserva(@Valid @RequestBody Reserva reserva,
                                                                @PathVariable("id") long id){
-        reserva.setIdReserva(id);
+        throw new NotImpletedException();
+        // TODO: 26/02/2023 Implementarlo para el segundo sprint 
+        /*reserva.setIdReserva(id);
 
         succe = SuccessResponseDTO.buildQuickResponse(
                 ResponseMessageConstants.MODIFIED_SUCCESS,
                 reservaService.modificarEntidad(reserva)
         );
-        log.debug("Reserva Modificar");
-        return ResponseEntity.ok(succe);
+        log.debug("Reserva Modificar");*/
+        
+        
     }
 
     @DeleteMapping("/{id}")

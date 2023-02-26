@@ -1,10 +1,10 @@
 package com.g4.dev.esportlancentersw.controller.adviceController;
 
 import com.g4.dev.esportlancentersw.DTO.response.ErrorResponseDTO;
-import com.g4.dev.esportlancentersw.exception.common.CorreoRepeatedException;
-import com.g4.dev.esportlancentersw.exception.common.DniRepeatedException;
-import com.g4.dev.esportlancentersw.exception.common.NotFoundException;
-import com.g4.dev.esportlancentersw.exception.common.TelephoneRepeatedException;
+import com.g4.dev.esportlancentersw.exception.common.*;
+import com.g4.dev.esportlancentersw.util.ExceptionsMessageConstants;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +18,7 @@ import java.util.*;
 
 @RestControllerAdvice
 public class ControllerAdvice {
+    private final Logger log = LogManager.getLogger(ControllerAdvice.class);
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -33,47 +34,58 @@ public class ControllerAdvice {
 
 
     @ExceptionHandler(DniRepeatedException.class)
-    public  ResponseEntity< ErrorResponseDTO>  repeatedDniHandler(DniRepeatedException dniex){
+    public ResponseEntity<ErrorResponseDTO> repeatedDniHandler(DniRepeatedException dniex) {
         ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.BAD_REQUEST,
                 Collections.singletonList(dniex.getMessage()));
-        return  new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(TelephoneRepeatedException.class)
-    public  ResponseEntity< ErrorResponseDTO>  repeatedTelephoneHandler(TelephoneRepeatedException ex){
+    public ResponseEntity<ErrorResponseDTO> repeatedTelephoneHandler(TelephoneRepeatedException ex) {
         ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.BAD_REQUEST,
                 Collections.singletonList(ex.getMessage()));
-        return  new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
-    }
-    @ExceptionHandler(CorreoRepeatedException.class)
-    public  ResponseEntity< ErrorResponseDTO>  repeatedCorreoHandler(CorreoRepeatedException ex){
-        ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.BAD_REQUEST,
-                Collections.singletonList(ex.getMessage()));
-        return  new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
-    }
-    @ExceptionHandler(NotFoundException.class)
-    public  ResponseEntity< ErrorResponseDTO>  notFoundHandler(NotFoundException ex){
-        ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.NOT_FOUND,
-                Collections.singletonList(ex.getMessage()));
-        return  new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(CorreoRepeatedException.class)
+    public ResponseEntity<ErrorResponseDTO> repeatedCorreoHandler(CorreoRepeatedException ex) {
+        ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.BAD_REQUEST,
+                Collections.singletonList(ex.getMessage()));
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponseDTO> notFoundHandler(NotFoundException ex) {
+        ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.NOT_FOUND,
+                Collections.singletonList(ex.getMessage()));
+        return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
+    }
 
 
     //Base de datos exception Handler
     @ExceptionHandler(ConstraintViolationException.class)
-    public  ResponseEntity< ErrorResponseDTO>  SQLServerUniqueConstraint(ConstraintViolationException ex){
+    public ResponseEntity<ErrorResponseDTO> SQLServerUniqueConstraint(ConstraintViolationException ex) {
         ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.NOT_FOUND,
                 Collections.singletonList(ex.getMessage()));
-        return  new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
-    /**
-     * @ExceptionHandler(Exception.class)
-     *     public  ResponseEntity< ErrorResponseDTO>  allExceptionsHandler(Exception ex){
-     *         ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.NOT_FOUND,
-     *                 Collections.singletonList(ex.getMessage()));
-     *         return  new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
-     *     }
-     */
+
+   /* @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResponseDTO> allExceptionsHandler(RuntimeException ex) {
+        ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.INTERNAL_SERVER_ERROR,
+                Collections.singletonList(ExceptionsMessageConstants.INTERNAL_SERVER_ERROR_MSG));
+
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(dto, HttpStatus.INTERNAL_SERVER_ERROR);
+    }*/
+
+    @ExceptionHandler(NotImpletedException.class)
+    public ResponseEntity<ErrorResponseDTO> NotImpletedExceptionHandler(NotImpletedException ex) {
+        ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.INTERNAL_SERVER_ERROR,
+                Collections.singletonList(ExceptionsMessageConstants.INTERNAL_SERVER_ERROR_MSG));
+
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(dto, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }

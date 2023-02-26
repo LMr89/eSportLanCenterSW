@@ -8,9 +8,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Calendar;
+
+@NamedStoredProcedureQuery(
+        name = "listarReservasPorFecha",
+        procedureName = "sp_listarReservasPorFechaActual",
+        resultClasses = Reserva.class,
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "idOrdenador", type =Long.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "fecharIngresada", type = String.class)
+        }
+)
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,9 +33,15 @@ public class Reserva {
     private Long idReserva;
 
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Calendar fecha;
+    @NotNull(message = ValidationMessageConstants.NO_FECHA_INICIO_ESTABLECIDA)
+    private Calendar fechaInicio;
+
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Calendar fechaFin;
 
     @Column(nullable = false)
     @NotNull(message = ValidationMessageConstants.TIEMPO_RESERVA)
