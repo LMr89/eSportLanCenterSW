@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,30 +24,27 @@ public class PedidoCompra {
 
     @ManyToOne
     @JoinColumn(name = "idProducto", nullable = false)
-    @NotBlank(message = ValidationMessageConstants.PRODUCTO_COMPRA)
+    @NotNull(message = ValidationMessageConstants.PRODUCTO_COMPRA)
     private Producto idProducto;
 
     @Column(nullable = false)
-    @NotBlank(message = ValidationMessageConstants.CANTIDAD_COMPRA)
+    @NotNull(message = ValidationMessageConstants.CANTIDAD_COMPRA)
     private int cantidad;
 
     @Column(nullable = false)
-    @NotBlank(message = ValidationMessageConstants.PRECIO_COMPRA)
+    @NotNull(message = ValidationMessageConstants.PRECIO_COMPRA)
     private Double precio;
 
-    @Column(nullable = false)
-    @NotBlank(message = ValidationMessageConstants.STOCK_COMPRA)
-    private int stock;
 
-
-    @NotBlank(message = ValidationMessageConstants.CATEGORIA_COMPRA)
+    @NotNull(message = ValidationMessageConstants.CATEGORIA_COMPRA)
     @ManyToOne
     @JoinColumn(name = "idCategoria", nullable = false)
     private Categoria idCategoria;
 
     @Column(nullable = false)
-    @NotBlank(message = ValidationMessageConstants.COMPRABANTE_COMPRA)
-    private Character tipoComprabante;
+    @NotNull(message = ValidationMessageConstants.COMPRABANTE_COMPRA)
+    @Size(min = 1, max = 1, message = ValidationMessageConstants.INDICADOR_COMPRABANTE_COMPRA)
+    private String tipoComprabante;
 
     @Column(nullable = false)
     private Boolean estado;

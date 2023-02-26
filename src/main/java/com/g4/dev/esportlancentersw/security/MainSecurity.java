@@ -54,7 +54,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable()
-                .authorizeRequests().antMatchers("/auth/**").permitAll()
+                .authorizeRequests().antMatchers("/auth/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)

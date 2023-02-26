@@ -28,6 +28,8 @@ public class ValidationMessageConstants {
     public static final  String DNI_USUARIO = "EL DNI del usuario es requerido";
     public static final  String PASSWORD_USUARIO= "Es obligatorio poner una contraseña valida";
 
+    public static final String NOT_BLOCKED_DEFINED = "No se especifico si el cliente esta bloqueado o no";
+
     //Ordenador
     public static final  String NOM_ORDENADOR ="Es obligatorio el nombre del ordenador";
     public static final  String CARACTERISTICAS_ORDENADOR = "Faltan las caracteristicas";
@@ -49,11 +51,22 @@ public class ValidationMessageConstants {
     public static final  String STOCK_COMPRA = "Es obligatorio introducir el stock";
     public static final  String CATEGORIA_COMPRA = "Es obligatorio especificar la categoria";
     public static final  String COMPRABANTE_COMPRA = "Es obligatorio introducir el tipo de comprabante";
+    public static final  String INDICADOR_COMPRABANTE_COMPRA = "Especificar SOLO CON : F -> Factura";
+    //venta
+    public static final String USUARIO_NO_ENCONTRADO_EN_VENTA = "Es requerido incluir a un usuario en la  venta";
+    public static final String CLIENTE_NO_ENCONTRADO_EN_VENTA = "Es requerido incluir a un cliente en la  venta";
+    public static final String IGV_NO_EN_VENTA = "No se especifico el igv en la venta";
+    public static final String TOTAL_NO_EN_VENTA = "No se especifico el TOTAL en la venta";
+    public static final String PRODUCTO_NO_EN_VENTA = "Debe existir al menos un producto en la venta";
+    public static final String CANTIDAD_NO_EN_VENTA = "No se especifico la cantidad de los productos vendidos" ;
 
+    public static final String SUBTOTAL_NO_EN_VENTA = "No se definio el subtotal de la venta";
     //Comun
     public static final  String CORREO = "El correo es obligatorio";
     public static final  String TELEFONO = "El telefono es de solo 9 digitos";
     public static final  String FECHA = "Es obligatorio poner la fecha";
     public static final  String NOMBRE_CORTO = "El nombre introducido es corto";
 
+
+    public static final String PAGINA_WEB_MAL_FORMADA = "Se ha ingresado una url web no valida";
 }

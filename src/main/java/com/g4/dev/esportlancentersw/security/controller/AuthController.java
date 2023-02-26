@@ -43,44 +43,7 @@ public class AuthController {
     JwtProvider jwtProvider;
 
 
-    @PostMapping("/nuevo")
-    public ResponseEntity<?> nuevo(@Valid @RequestBody Usuario nomUsuario,
-                                   BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>("Compos mal puesto", HttpStatus.BAD_REQUEST);
 
-        }
-
-        if (usuarioService.existsByNomUsuario(nomUsuario.getNomUsuario())) {
-            return new ResponseEntity<>("Ese nombre ya existe", HttpStatus.BAD_REQUEST);
-        }
-        if (usuarioService.existsByEmail(nomUsuario.getCorreo())) {
-            return new ResponseEntity<>("Ese email ya existe", HttpStatus.BAD_REQUEST);
-        }
-        /**
-         * Usuario usuario = Usuario
-         *                 .builder()
-         *                 .id(0)
-         *                 .nombre(nomUsuario.getNombre())
-         *                 .nomUsuario(nomUsuario.getNombre())
-         *                 .correo(nomUsuario.getEmail())
-         *                 .password(encoder.encode(nomUsuario.getPassword()))
-         *
-         *                 .build();
-         */
-
-        nomUsuario.setPassword(encoder.encode(nomUsuario.getPassword()));
-
-        Set<Rol> roles = new HashSet<>();
-        roles.add(rolService.getByRolNombre(RolNombre.ROL_USER).get());
-        if (nomUsuario.getRoles().contains("admin")) {
-            roles.add(rolService.getByRolNombre(RolNombre.ROL_ADMIN).get());
-
-        }
-        nomUsuario.setRoles(roles);
-        usuarioService.saveUsuario(nomUsuario);
-        return new ResponseEntity<>("Usuario guardado", HttpStatus.CREATED);
-    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginUsuario loginUsuario,

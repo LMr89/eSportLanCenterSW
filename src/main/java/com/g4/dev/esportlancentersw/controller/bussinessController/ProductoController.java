@@ -1,8 +1,10 @@
 package com.g4.dev.esportlancentersw.controller.bussinessController;
 
 
+import com.g4.dev.esportlancentersw.DTO.response.SuccessResponseDTO;
 import com.g4.dev.esportlancentersw.model.Producto;
 import com.g4.dev.esportlancentersw.service.IServices.IProductoService;
+import com.g4.dev.esportlancentersw.util.ResponseMessageConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/producto")
 public class ProductoController {
+    private  SuccessResponseDTO succe;
     @Autowired
     private IProductoService productoService;
 
@@ -30,26 +33,43 @@ public class ProductoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Producto> buscarProductoPorId(@PathVariable("id") Long id){
-        return new ResponseEntity<>(productoService.buscarEntidad(id).get(), HttpStatus.OK);
+    public ResponseEntity<SuccessResponseDTO> buscarProductoPorId(@PathVariable("id") Long id){
+        succe = SuccessResponseDTO.buildQuickResponse(
+                ResponseMessageConstants.FOUND_SUCCESS,
+                productoService.buscarEntidad(id).get()
+        );
+        return ResponseEntity.ok(succe);
     }
 
 
     @PostMapping
-    public ResponseEntity<Producto> registrarProducto(@Valid @RequestBody Producto pro){
-        return new ResponseEntity<>(productoService.registrarEntidad(pro), HttpStatus.OK);
+    public ResponseEntity<SuccessResponseDTO> registrarProducto(@Valid @RequestBody Producto pro){
+        succe = SuccessResponseDTO.buildQuickResponse(
+                ResponseMessageConstants.ENTITY_CREATED,
+                productoService.registrarEntidad(pro)
+        );
+        return ResponseEntity.ok(succe);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> modificarProducto(@Valid @RequestBody Producto pro,
+    public ResponseEntity<SuccessResponseDTO> modificarProducto(@Valid @RequestBody Producto pro,
                                                       @PathVariable("id") long id){
         pro.setIdProducto(id);
-        return new ResponseEntity<>(productoService.modificarEntidad(pro), HttpStatus.OK);
+
+        succe = SuccessResponseDTO.buildQuickResponse(
+                ResponseMessageConstants.MODIFIED_SUCCESS,
+                productoService.modificarEntidad(pro)
+        );
+        return ResponseEntity.ok(succe);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> eliminarProducto(@PathVariable("id") Long id){
-        return  new ResponseEntity<>(productoService.eliminarEntidad(id), HttpStatus.OK);
+    public ResponseEntity<SuccessResponseDTO> eliminarProducto(@PathVariable("id") Long id){
+        succe = SuccessResponseDTO.buildQuickResponse(
+                ResponseMessageConstants.DELETED_SUCCESS,
+                productoService.eliminarEntidad(id)
+        );
+        return ResponseEntity.ok(succe);
     }
 
 }

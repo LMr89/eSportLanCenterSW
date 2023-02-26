@@ -1,16 +1,13 @@
 package com.g4.dev.esportlancentersw.model;
 
 import com.g4.dev.esportlancentersw.util.ValidationMessageConstants;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +20,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idCliente;
 
-    @NotNull
+
     @Column(nullable = false)
     @NotBlank(message = ValidationMessageConstants.NOMBRE_USUARIO)
     private String nombre;
@@ -34,6 +31,7 @@ public class Cliente {
 
     @Column(nullable = false, unique = true)
     @NotBlank(message = ValidationMessageConstants.DNI_USUARIO)
+    @Size(min = 8,max = 9,message = ValidationMessageConstants.DNI_USUARIO)
     private String dni;
 
     @Column(nullable = false)
@@ -45,14 +43,14 @@ public class Cliente {
     private String telefono;
 
     @Column(nullable = false)
+    @NotNull(message = ValidationMessageConstants.NOT_BLOCKED_DEFINED)
     private Boolean esBloqueado;
 
-    @NotNull
     @Column(unique = true , nullable = false)
     @NotBlank(message = ValidationMessageConstants.DNI_USUARIO)
     private String nomUsuario;
 
-    @NotNull
+    @NotBlank
     @Email(message = ValidationMessageConstants.CORREO)
     private String correo;
 
