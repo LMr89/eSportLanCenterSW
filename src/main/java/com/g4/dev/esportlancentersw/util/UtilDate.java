@@ -57,4 +57,8 @@ public class UtilDate {
     public static String getDateToStringForPdf(){
         return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
     }
+
+    public  static String formatDateIntoString(Calendar cal){
+        return new SimpleDateFormat("yyyyMMddHHmmss").format(cal.getTime());
+    }
 }

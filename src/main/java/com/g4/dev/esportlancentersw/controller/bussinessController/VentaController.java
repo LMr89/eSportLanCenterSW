@@ -1,6 +1,7 @@
 package com.g4.dev.esportlancentersw.controller.bussinessController;
 
 import com.g4.dev.esportlancentersw.DTO.response.SuccessResponseDTO;
+import com.g4.dev.esportlancentersw.mapper.venta.VentaMapper;
 import com.g4.dev.esportlancentersw.model.Cliente;
 import com.g4.dev.esportlancentersw.model.Venta;
 import com.g4.dev.esportlancentersw.service.IServices.IVentaService;
@@ -14,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -24,11 +27,19 @@ public class VentaController {
     private SuccessResponseDTO succe;
 
     @Autowired private IVentaService ventaService;
+    @Autowired  HttpServletRequest req;
 
     @GetMapping
-    public ResponseEntity<List<Venta>> listarVentasActivos()
+    public ResponseEntity<List<Venta>> listarVentasActivos(final HttpServletRequest req)
     {
         log.debug("Listando Ventas");
+        System.out.println(req.getRequestURL());
+        System.out.println(req.getRequestURI());
+        System.out.println(req.getRemoteHost());
+        System.out.println(req.getContextPath());
+        System.out.println(req.getServletPath());
+        System.out.println(req.getServerName());
+        System.out.println(req.getLocalAddr());
         return  new ResponseEntity<>(ventaService.listarDatos(), HttpStatus.OK);
     }
     @GetMapping("/pag")
@@ -48,10 +59,10 @@ public class VentaController {
     }
 
     @PostMapping
-    public ResponseEntity<SuccessResponseDTO> registrarVenta(@Valid @RequestBody Venta venta){
+    public ResponseEntity<SuccessResponseDTO> registrarVenta(@Valid @RequestBody Venta venta ){
         succe = SuccessResponseDTO.buildQuickResponse(
                 ResponseMessageConstants.ENTITY_CREATED,
-                ventaService.registrarEntidad(venta)
+                VentaMapper.mapEntidatToDTO(ventaService.registrarEntidad(venta),req)
         );
         log.debug("Venta Registrar");
         return ResponseEntity.ok(succe);

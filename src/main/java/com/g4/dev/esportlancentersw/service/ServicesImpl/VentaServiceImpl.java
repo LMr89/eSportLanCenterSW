@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.List;
@@ -33,6 +34,12 @@ public class VentaServiceImpl implements IVentaService {
 
     @Autowired private IProductoService productoService;
 
+
+    private StringBuilder stringBuilder;
+
+    public VentaServiceImpl() {
+        stringBuilder = new StringBuilder();
+    }
 
     @Override
     public List<Venta> listarDatos() {
@@ -81,11 +88,16 @@ public class VentaServiceImpl implements IVentaService {
         entidad.setTotal(total);
 
         updateStockProduct(entidad);
-         ventaRepository.save(entidad);
 
-        return entidad;
+        String nom = getNomCliente(entidad.getIdCliente().getIdCliente());
+        entidad.getIdCliente().setNombre(nom);
+
+        return ventaRepository.save(entidad);
     }
 
+    String getNomCliente(long id){
+        return  clienteRepository.getNomCliente(id);
+    }
     @Override
     public Venta modificarEntidad(Venta entidad) {
         if (buscarEntidad(entidad.getIdVenta()).isPresent()){
@@ -141,5 +153,19 @@ public class VentaServiceImpl implements IVentaService {
                         });
 
         return  true;
+    }
+
+    @Override
+    public String getUriForShowTicket(HttpServletRequest req , int idVenta) {
+        stringBuilder.setLength(0);
+        stringBuilder
+                .append("http://")
+                .append(req.getServerName())
+                .append(":")
+                .append(req.getServerPort())
+                .append(req.getContextPath())
+                .append("/reportes/ticketVenta?venta=")
+                .append(idVenta);
+        return stringBuilder.toString();
     }
 }

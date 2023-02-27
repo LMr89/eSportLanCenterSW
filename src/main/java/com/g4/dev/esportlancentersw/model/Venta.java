@@ -1,5 +1,6 @@
 package com.g4.dev.esportlancentersw.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.g4.dev.esportlancentersw.security.model.Usuario;
 import com.g4.dev.esportlancentersw.util.ValidationMessageConstants;
 import lombok.AllArgsConstructor;
@@ -26,12 +27,13 @@ public class Venta {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    @NotNull(message = ValidationMessageConstants.USUARIO_NO_ENCONTRADO_EN_VENTA)
+    @NotNull(message = ValidationMessageConstants.CLIENTE_NO_ENCONTRADO_EN_VENTA)
     private Cliente idCliente;
+
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    @NotNull(message = ValidationMessageConstants.CLIENTE_NO_ENCONTRADO_EN_VENTA)
+    @NotNull(message = ValidationMessageConstants.USUARIO_NO_ENCONTRADO_EN_VENTA)
     private Usuario idUsuario;
 
     @Temporal(TemporalType.DATE)
