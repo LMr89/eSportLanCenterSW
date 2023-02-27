@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.0.final using JasperReports Library version 6.19.0-646c68931cebf1a58bc65c4359d1f0ca223c5e94  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ticketVenta" pageWidth="210" pageHeight="439" columnWidth="170" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="42016963-4cb6-4eb6-ad0e-f865f663aff3">
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Lancenter_MSSQLSERVER_CONX"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="528"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="458"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="479"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
+	<parameter name="imagenEmpresa" class="java.io.InputStream"/>
+	<parameter name="idVenta" class="java.lang.Integer"/>
+	<parameter name="TicketNum" class="java.lang.String"/>
+	<parameter name="ClienteNom" class="java.lang.String"/>
+	<parameter name="subtotal" class="java.lang.Double"/>
+	<parameter name="igv" class="java.lang.Double"/>
+	<parameter name="total" class="java.lang.Double"/>
+	<parameter name="vendedor" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT dt.cantidad Cantidad, p.nombre NombreProducto, p.precio_unitario Precio ,
+	dt.importe Importe 
+	FROM Detalle_venta dt INNER JOIN Producto  p 
+		ON p.id_producto = dt.id_producto 
+	WHERE dt.id_venta =   $P{idVenta} ]]>
+	</queryString>
+	<field name="Cantidad" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Cantidad"/>
+		<property name="com.jaspersoft.studio.field.label" value="Cantidad"/>
+	</field>
+	<field name="NombreProducto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NombreProducto"/>
+		<property name="com.jaspersoft.studio.field.label" value="NombreProducto"/>
+	</field>
+	<field name="Precio" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="Precio"/>
+		<property name="com.jaspersoft.studio.field.label" value="Precio"/>
+	</field>
+	<field name="Importe" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="Importe"/>
+		<property name="com.jaspersoft.studio.field.label" value="Importe"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<image>
+				<reportElement x="46" y="0" width="70" height="40" uuid="c452e1be-da59-479c-92b6-a7390feaddbc"/>
+				<imageExpression><![CDATA["C:/Users/LuisQM/Desktop/gusesprort.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="10" y="47" width="50" height="16" uuid="b6075dc5-2674-4708-867d-1abe53b1ed33"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Ticket Nª]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="48" width="84" height="14" uuid="3a463098-bcde-48b1-a6ad-6b4bd94531c0"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TicketNum}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="-6" y="17" width="46" height="18" uuid="296b84a4-ae63-4f5f-92a7-0297fd278cd9"/>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-6" y="0" width="82" height="15" uuid="e8642d03-a55b-41f9-8442-24ffcf750228"/>
+				<text><![CDATA[Fecha de emision:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="94" y="0" width="70" height="15" uuid="a8c28ff7-094c-4944-b7a2-675c608e5721"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="44" y="20" width="130" height="30" uuid="9597c50c-7dbf-4bfd-8f22-754420ca64ad"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ClienteNom}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<line>
+				<reportElement x="-10" y="20" width="191" height="1" uuid="6b49cf17-6bc2-4ced-ac3a-3603237030a9"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="8" width="26" height="12" uuid="7d4e3a29-8c60-472a-b875-cc9a57b56ea7"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Cant.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="8" width="60" height="12" uuid="0dc9f7f6-eb4e-4688-a5dd-7ff4a7b5d5de"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="8" width="30" height="12" uuid="7fdc59f9-4cdb-46e1-a887-3c2799158c63"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="8" width="30" height="12" uuid="a47ae84b-3c5e-41b3-a560-e981f24b6004"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="-14" y="5" width="40" height="26" uuid="4a958c6a-7bf4-4b3d-906f-41131d67d154">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3259c1d7-0c9f-4a60-9d1a-df3991575923"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="26" y="5" width="54" height="26" uuid="9f42bc99-6f31-4a3f-abad-43e5f7e8353a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="52056613-d51f-4103-a27b-0ca59eec0bd4"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NombreProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="7" width="40" height="22" uuid="9d9c8c30-8264-4b74-88e0-4b02036df10b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="56ff81d9-3c37-4e94-b817-7efd04afd1db"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{Precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="7" width="50" height="22" uuid="45e8c37b-69c2-4375-9e07-fa56a2052295">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="14fa7279-db82-4fc9-96d7-8841737488d3"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{Importe}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="79" y="11" width="40" height="12" uuid="0d2248f3-828e-4c96-a62a-c3397e536cbc"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Subtotal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="30" width="40" height="12" uuid="68fb4152-ead6-4851-972c-44f63918b12e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[IGV:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="50" width="42" height="12" uuid="5d65f790-81f0-4a57-b420-cf5a633f1fcf"/>
+				<textElement markup="styled">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="11" width="55" height="12" uuid="f99fb05a-e833-4e7e-b3db-235767ba8a8f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="126" y="30" width="54" height="12" uuid="17df7928-8310-4da9-8a0e-98b5c6f96e3f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{igv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="126" y="50" width="54" height="12" uuid="99fa4f74-cba2-4107-93bf-83c8c879407f"/>
+				<textElement markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-10" y="5" width="191" height="1" uuid="d8e94645-1213-4c03-a549-dac176717109"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="150" splitType="Stretch">
+			<staticText>
+				<reportElement x="-4" y="10" width="84" height="12" uuid="7c6c5a99-1535-4a16-9a7b-2ed26c1bb839"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Forma de pago:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="10" width="84" height="12" uuid="35633ad3-6c7d-4101-aeae-e938d813be78"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Contado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-4" y="30" width="62" height="14" uuid="a2ca3d90-b7d2-49f8-ae37-834b7e644aa3"/>
+				<text><![CDATA[Vendedor:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="30" width="84" height="20" uuid="fe85ab1e-b127-4741-bf5c-2d703c4474d0"/>
+				<textFieldExpression><![CDATA[$P{vendedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-5" y="80" width="190" height="20" uuid="337d23d5-821a-4387-b3a5-f181525031dc"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Representacion simple de venta electronica		.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="100" width="100" height="26" uuid="5a8c46cc-be85-4115-aaee-76c545a934cc"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[GosueSports]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-11" y="0" width="191" height="1" uuid="82febc93-dc64-4018-803d-ea16396536ec"/>
+			</line>
+			<line>
+				<reportElement x="-14" y="60" width="191" height="1" uuid="1fdc11ca-705e-45eb-b3ff-6384a5df8f6c"/>
+			</line>
+			<staticText>
+				<reportElement x="126" y="120" width="44" height="24" uuid="30e652b3-9470-4779-8eac-030102b23a1d"/>
+				<text><![CDATA[Grupo 4]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

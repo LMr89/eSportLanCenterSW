@@ -158,11 +158,9 @@ public class ReservaServiceImpl implements IReservaService {
                                 .format(re.getFechaInicio().getTime())
                 );
 
-        reservasFromSP.forEach(System.out::println);
+        //reservasFromSP.forEach(System.out::println);
         if (reservasFromSP.size() >= 1){
             for(Reserva reserva : reservasFromSP){
-
-                // TODO: 26/02/2023 Implementar la verficiacion si el objeto calendar esta en el rango de 2 objetos mas
                 if (UtilDate.isCalendarBetween
                         (reserva.getFechaInicio(), reserva.getFechaFin(), re.getFechaInicio())){
                     isAllOk = false;

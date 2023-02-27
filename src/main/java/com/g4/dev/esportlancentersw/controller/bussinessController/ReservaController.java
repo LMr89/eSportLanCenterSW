@@ -66,7 +66,7 @@ public class ReservaController {
     public ResponseEntity<SuccessResponseDTO> modificarReserva(@Valid @RequestBody Reserva reserva,
                                                                @PathVariable("id") long id){
         throw new NotImpletedException();
-        // TODO: 26/02/2023 Implementarlo para el segundo sprint 
+        // TODO: 26/02/2023 Implementarlo para el segundo sprint
         /*reserva.setIdReserva(id);
 
         succe = SuccessResponseDTO.buildQuickResponse(

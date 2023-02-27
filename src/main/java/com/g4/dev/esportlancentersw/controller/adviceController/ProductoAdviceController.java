@@ -2,6 +2,7 @@ package com.g4.dev.esportlancentersw.controller.adviceController;
 
 import com.g4.dev.esportlancentersw.DTO.response.ErrorResponseDTO;
 import com.g4.dev.esportlancentersw.exception.producto.ProductoNameRepeatedException;
+import com.g4.dev.esportlancentersw.exception.producto.ProductoNoEnoughStockException;
 import com.g4.dev.esportlancentersw.exception.producto.ProductoNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,15 @@ public class ProductoAdviceController {
 
     @ExceptionHandler(ProductoNameRepeatedException.class)
     public ResponseEntity<ErrorResponseDTO> prodNombreRepetido(ProductoNameRepeatedException ex){
+        ErrorResponseDTO error = ErrorResponseDTO.builQuickResponse(HttpStatus.BAD_REQUEST,
+                Collections.singletonList(ex.getMessage()));
+        return  new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+
+
+    }
+
+    @ExceptionHandler(ProductoNoEnoughStockException.class)
+    public ResponseEntity<ErrorResponseDTO> ProductoNoEnoughStockExceptionHandler(ProductoNoEnoughStockException ex){
         ErrorResponseDTO error = ErrorResponseDTO.builQuickResponse(HttpStatus.BAD_REQUEST,
                 Collections.singletonList(ex.getMessage()));
         return  new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);

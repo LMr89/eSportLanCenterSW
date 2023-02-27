@@ -13,4 +13,9 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
     Optional<Producto> findByNombre(String nombre);
     @Query(value = "SELECT p.stock FROM Producto p WHERE p.idProducto  = ?1" )
     int getStockByIdProducto(long idProducto);
+
+    @Query(value = "SELECT p.precioUnitario FROM Producto p WHERE p.idProducto  = ?1" )
+    double getProductoPrice(long idProducto);
 }
+
+

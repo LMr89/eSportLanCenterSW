@@ -38,7 +38,7 @@ public class DetalleVenta {
 
     @Column(precision = 5, scale = 2)
     @NotNull(message = ValidationMessageConstants.SUBTOTAL_NO_EN_VENTA)
-    private Double precio;
+    private Double importe;
 
     @Column(precision = 5, scale = 2)
     private Double descuento;

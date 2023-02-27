@@ -60,14 +60,17 @@ public class VentaServiceImpl implements IVentaService {
     public Venta registrarEntidad(Venta entidad) {
         validateVentaInput(entidad);
         verifyForStockOfEachProduct(entidad);
-        Double importe = 0.0;
+        double importe = 0.0;
 
         for (DetalleVenta detalleVenta : entidad.getDetalleVentas()){
             detalleVenta.setVenta(entidad);
-            double subtotal = detalleVenta.getCantidad() *detalleVenta.getPrecio();
+            double productoPrecio = productoRepository.getProductoPrice(detalleVenta.getIdProducto().getIdProducto());
+            double subtotal = detalleVenta.getCantidad() * productoPrecio;
+            detalleVenta.setImporte(subtotal);
             importe += subtotal;
 
         }
+
 
         double igv = importe * 0.18;
         double total = igv + importe;

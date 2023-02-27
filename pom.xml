@@ -89,6 +89,13 @@
             <version>2.6</version>
         </dependency>
 
+        <!--Dependencia para la generacion del reporte-->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.17.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

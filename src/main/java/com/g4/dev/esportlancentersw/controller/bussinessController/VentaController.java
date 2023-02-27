@@ -47,7 +47,6 @@ public class VentaController {
         return ResponseEntity.ok(succe);
     }
 
-
     @PostMapping
     public ResponseEntity<SuccessResponseDTO> registrarVenta(@Valid @RequestBody Venta venta){
         succe = SuccessResponseDTO.buildQuickResponse(
@@ -81,5 +80,4 @@ public class VentaController {
         log.debug("Venta Eliminar");
         return new ResponseEntity<>(succe, HttpStatus.valueOf(succe.getHttpStatus()));
     }
-
 }
