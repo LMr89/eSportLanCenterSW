@@ -5,8 +5,9 @@ public class ReportesConstants {
     public static final String JASPER_EXTENSION = ".jasper";
     public static final String PDF_EXTENSION = ".pdf";
 
+    public  static final String RESOURCES_DIR = "src\\main\\resources\\reportes\\";
 
-    public  static  final  String JASPER_REPORT_NAME = "ticketVenta";
+    public  static  final  String JASPER_REPORT_NAME_TICKET_VENTA = "ticketVenta";
 
     public static final String PARAM_LOGO = "imagenEmpresa";
     public static final String PARAM_ID_VENTA= "idVenta";
@@ -18,4 +19,8 @@ public class ReportesConstants {
     public static final String PARAM_VENDEDOR = "vendedor";
 
 
+    //Reporte Compras
+
+    public static final String PARAM_ID_PEDIDO_COMPRA = "idPedidoCompra";
+    public  static  final  String JASPER_REPORT_NAME_PEDIDO_COMPRA = "reportePedidoCompra";
 }

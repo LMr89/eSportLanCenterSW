@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Calendar;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,6 +46,11 @@ public class PedidoCompra {
     @NotNull(message = ValidationMessageConstants.COMPRABANTE_COMPRA)
     @Size(min = 1, max = 1, message = ValidationMessageConstants.INDICADOR_COMPRABANTE_COMPRA)
     private String tipoComprabante;
+
+
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Calendar fechaRegistro;
 
     @Column(nullable = false)
     private Boolean estado;

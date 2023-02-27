@@ -2,6 +2,7 @@ package com.g4.dev.esportlancentersw.reportes.service;
 
 import com.g4.dev.esportlancentersw.model.Venta;
 import com.g4.dev.esportlancentersw.reportes.util.ReportesConstants;
+import com.g4.dev.esportlancentersw.reportes.util.ReportesUtils;
 import com.g4.dev.esportlancentersw.service.IServices.IVentaService;
 import com.g4.dev.esportlancentersw.util.ConexionJDBC;
 import net.sf.jasperreports.engine.JRException;
@@ -10,12 +11,11 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -26,10 +26,14 @@ import java.util.Map;
 import static com.g4.dev.esportlancentersw.reportes.util.ReportesConstants.*;
 
 @Service
-public class TiicketVentaService {
+public class TiicketVentaService implements  IReporteService{
     private Connection conn ;
     private Map<String , Object> parameters;
     private Venta currentVenta;
+
+    //Clase encargada de sacar la ruta absoluta de un archivo del directorio resource
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @Autowired private IVentaService ventaService;
 
@@ -46,7 +50,7 @@ public class TiicketVentaService {
         fillMapParameterWithEntity(currentVenta,this.parameters);
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        ClassPathResource resource = new ClassPathResource(JASPER_FOLDER + File.separator + JASPER_REPORT_NAME + JASPER_EXTENSION);
+        ClassPathResource resource = new ClassPathResource(JASPER_FOLDER + File.separator + JASPER_REPORT_NAME_TICKET_VENTA + JASPER_EXTENSION);
 
         InputStream inputStream = resource.getInputStream();
         JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, this.parameters, this.conn);
@@ -71,22 +75,26 @@ public class TiicketVentaService {
 
     }
 
-    public String exportarAPdfFile(long idVenta) throws IOException {
+    Venta searchVentabd(long id){
+        return ventaService.buscarEntidad(id).get();
+    }
+
+    @Override
+    public String exportarAPdfFile(Object idDato) {
         String rutaPdf = "";
 
         try {
-            String rutaCarpeta = "src/main/resources/reportes/";
             String nombreDelPdf = "ticket" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".pdf";
 
-            String rutaFinalPdf = rutaCarpeta + nombreDelPdf;
+            String rutaFinalPdf = RESOURCES_DIR + nombreDelPdf;
             /* Agregar la imagene al reporte */
-            currentVenta  = searchVentabd(idVenta);
+            currentVenta  = searchVentabd((Long) idDato);
             fillMapParameterWithEntity(currentVenta,this.parameters);
 
             try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
 
                 ClassPathResource resource = new ClassPathResource(
-                        JASPER_FOLDER + File.separator + JASPER_REPORT_NAME + JASPER_EXTENSION);
+                        JASPER_FOLDER + File.separator + JASPER_REPORT_NAME_TICKET_VENTA + JASPER_EXTENSION);
 
                 InputStream inputStream = resource.getInputStream();
                 JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, parameters, conn);
@@ -96,28 +104,17 @@ public class TiicketVentaService {
             }
 
             rutaPdf = rutaFinalPdf;
-        } catch (JRException e) {
+        } catch (JRException | IOException e) {
             e.printStackTrace();
         }
         return rutaPdf;
     }
 
-    public void eliminarPdfFile(String rutaPdf) {
-        try {
-            Path path = Paths.get(rutaPdf);
-            Files.delete(path);
-
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-    }
-
-    Venta searchVentabd(long id){
-        return ventaService.buscarEntidad(id).get();
-    }
-
-    void fillMapParameterWithEntity(Venta ve, Map<String , Object> parameters){
-        parameters.put(ReportesConstants.PARAM_LOGO, JASPER_FOLDER + File.separator + "imagenes" + File.separator + "gusesprort.jpg");
+    @Override
+    public void fillMapParameterWithEntity(Object obj, Map<String, Object> parameters) {
+        verif();
+        Venta ve = (Venta) obj;
+        parameters.put(ReportesConstants.PARAM_LOGO, ReportesUtils.getBufferFromResourceImage(resourceLoader));
         parameters.put(PARAM_ID_VENTA, ve.getIdVenta().intValue());
         parameters.put(PARAM_TICKET_NUM, "T00000"+ve.getIdVenta());
         parameters.put(PARAM_CLIENTE_NUM, ve.getIdCliente().getNombre());
@@ -125,11 +122,19 @@ public class TiicketVentaService {
         parameters.put(PARAM_IGV, ve.getIgv());
         parameters.put(PARAM_TOTAL, ve.getTotal());
         parameters.put(PARAM_VENDEDOR, ve.getIdUsuario().getNomUsuario());
-
-
-
-
     }
-
-
+    void verif(){
+        Resource r = resourceLoader.getResource("classpath:imagenes"+File.separator+"gusesprort.jpg");
+        File fil = null;
+        try {
+            fil = r.getFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (fil.exists()){
+            System.out.println("Existe");
+        }else{
+            System.out.println("No exisste");
+        }
+    }
 }

@@ -53,4 +53,8 @@ public class UtilDate {
         );*/
         return  calToCompare.compareTo(calInicio) >= 0 &&  calToCompare.compareTo(calFin) <= 0;
     }
+
+    public static String getDateToStringForPdf(){
+        return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+    }
 }

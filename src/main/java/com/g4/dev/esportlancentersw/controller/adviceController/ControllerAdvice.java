@@ -3,6 +3,7 @@ package com.g4.dev.esportlancentersw.controller.adviceController;
 import com.g4.dev.esportlancentersw.DTO.response.ErrorResponseDTO;
 import com.g4.dev.esportlancentersw.exception.common.*;
 import com.g4.dev.esportlancentersw.util.ExceptionsMessageConstants;
+import net.sf.jasperreports.engine.JRException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
@@ -70,14 +71,14 @@ public class ControllerAdvice {
         return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
     }
 
-   /* @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ErrorResponseDTO> allExceptionsHandler(RuntimeException ex) {
+    @ExceptionHandler(JRException.class)
+    public ResponseEntity<ErrorResponseDTO> allExceptionsHandler(JRException ex) {
         ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.INTERNAL_SERVER_ERROR,
                 Collections.singletonList(ExceptionsMessageConstants.INTERNAL_SERVER_ERROR_MSG));
 
         log.error(ex.getMessage());
         return new ResponseEntity<>(dto, HttpStatus.INTERNAL_SERVER_ERROR);
-    }*/
+    }
 
     @ExceptionHandler(NotImpletedException.class)
     public ResponseEntity<ErrorResponseDTO> NotImpletedExceptionHandler(NotImpletedException ex) {

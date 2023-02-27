@@ -16,7 +16,7 @@
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="458"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="479"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
-	<parameter name="imagenEmpresa" class="java.io.InputStream"/>
+	<parameter name="imagenEmpresa" class="java.awt.image.BufferedImage"/>
 	<parameter name="idVenta" class="java.lang.Integer"/>
 	<parameter name="TicketNum" class="java.lang.String"/>
 	<parameter name="ClienteNom" class="java.lang.String"/>
@@ -29,7 +29,7 @@
 	dt.importe Importe 
 	FROM Detalle_venta dt INNER JOIN Producto  p 
 		ON p.id_producto = dt.id_producto 
-	WHERE dt.id_venta =   $P{idVenta} ]]>
+	WHERE dt.id_venta =   $P{idVenta}]]>
 	</queryString>
 	<field name="Cantidad" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="Cantidad"/>
@@ -54,7 +54,7 @@
 		<band height="67" splitType="Stretch">
 			<image>
 				<reportElement x="46" y="0" width="70" height="40" uuid="c452e1be-da59-479c-92b6-a7390feaddbc"/>
-				<imageExpression><![CDATA["C:/Users/LuisQM/Desktop/gusesprort.jpg"]]></imageExpression>
+				<imageExpression><![CDATA[$P{imagenEmpresa}]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="10" y="47" width="50" height="16" uuid="b6075dc5-2674-4708-867d-1abe53b1ed33"/>

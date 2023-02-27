@@ -10,6 +10,7 @@ import com.g4.dev.esportlancentersw.repository.PedidoCompraRepository;
 import com.g4.dev.esportlancentersw.repository.ProductoRepository;
 import com.g4.dev.esportlancentersw.service.IServices.IPedidoCompraService;
 import com.g4.dev.esportlancentersw.service.IServices.IProductoService;
+import com.g4.dev.esportlancentersw.util.UtilDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -59,6 +60,7 @@ public class PedidoCompraServiceImpl implements IPedidoCompraService {
     public PedidoCompra registrarEntidad(PedidoCompra entidad) {
         validateSaleOrderInput(entidad);
         entidad.setEstado(true);
+        entidad.setFechaRegistro(UtilDate.getExactlyCalendar());
         pedidoCompraRepository.save(entidad);
         incrementStock(entidad.getIdProducto().getIdProducto(), entidad.getCantidad());
         return entidad;
@@ -129,5 +131,10 @@ public class PedidoCompraServiceImpl implements IPedidoCompraService {
         iProductoService.incrementStockByOrderSale(id, newStock);
         return true;
 
+    }
+
+    @Override
+    public boolean existsByIdPedido(long id) {
+        return pedidoCompraRepository.existsById(id);
     }
 }

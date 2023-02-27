@@ -1,7 +1,10 @@
 package com.g4.dev.esportlancentersw.reportes.controller;
 
 
+import com.g4.dev.esportlancentersw.reportes.service.ReporteCompraService;
 import com.g4.dev.esportlancentersw.reportes.service.TiicketVentaService;
+import com.g4.dev.esportlancentersw.reportes.util.ReportesResponseEntity;
+import com.g4.dev.esportlancentersw.reportes.util.ReportesUtils;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -23,6 +26,7 @@ import java.sql.SQLException;
 @RequestMapping("/reportes")
 public class ReportesController {
     @Autowired private TiicketVentaService service;
+    @Autowired private ReporteCompraService reporteCompraService;
 
     @GetMapping("/ticketVenta")
     public ResponseEntity<Resource> descargarPdf(@RequestParam("venta") long id)
@@ -30,15 +34,16 @@ public class ReportesController {
 
         //service.exportar(id);
         String ruta = service.exportarAPdfFile(id);
-        byte[] data = Files.readAllBytes(Paths.get(ruta));
-        ByteArrayResource resource = new ByteArrayResource(data);
-        MediaType mediaType = MediaType.APPLICATION_PDF;
+        ByteArrayResource resource = ReportesUtils.getBytesFromPdfFile(ruta);
+        ReportesUtils.eliminarPdfFile(ruta);
+        return ReportesResponseEntity.sendPdfIntoResponse(resource, ruta);
+    }
 
-        service.eliminarPdfFile(ruta);
-        return ResponseEntity.ok().header("Content-Disposition", "inline; filename=\""+Paths.get(ruta).getFileName()+"\".pdf")
-                .contentLength(resource.contentLength())
-                .contentType(mediaType)
-                .body(resource);
+    @GetMapping("/pedidoCompra")
+    public ResponseEntity<Resource> descargarReporteComprasPdf(@RequestParam("pedidoCompra") long id)
+            throws IOException{
+        ByteArrayResource resource =reporteCompraService.exportToByteArrayResource(id);
+        return ReportesResponseEntity.sendPdfIntoResponse(resource);
     }
 
 
