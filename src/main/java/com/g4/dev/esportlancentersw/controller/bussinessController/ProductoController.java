@@ -32,6 +32,11 @@ public class ProductoController {
         return new ResponseEntity<>(productoService.listarEntidadPorPagina(pagProducto), HttpStatus.OK);
     }
 
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Producto>> listarProductosPorNombre(@RequestParam("name")String name){
+        return new ResponseEntity<>(productoService.findByAnyName(name), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<SuccessResponseDTO> buscarProductoPorId(@PathVariable("id") Long id){
         succe = SuccessResponseDTO.buildQuickResponse(

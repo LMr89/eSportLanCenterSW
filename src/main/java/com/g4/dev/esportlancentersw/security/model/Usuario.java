@@ -11,6 +11,7 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
@@ -37,6 +38,7 @@ public class Usuario {
 
     @Column(nullable = false, unique = true, length = 8)
     @NotBlank(message = ValidationMessageConstants.DNI_USUARIO)
+    @Size(min = 8, max = 9,message = "El dni es de solo 8 digitos")
     private String dni;
 
     @Column(nullable = false)

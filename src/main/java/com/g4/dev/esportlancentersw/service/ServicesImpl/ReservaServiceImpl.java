@@ -145,7 +145,7 @@ public class ReservaServiceImpl implements IReservaService {
      * no debe ser igual a las fecha de inicio y fin de un registro con el mismo
      * ordenador
      * @param re Reserva entidad
-     * @return the amount of health hero has after attack
+     * @return isAllOk
      * @author Luis DEV
      * @since 1.0
      */

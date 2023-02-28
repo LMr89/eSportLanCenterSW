@@ -21,7 +21,7 @@ public class CategoriaServiceImpl implements ICategoriaService {
 
     @Override
     public List<Categoria> listarDatos() {
-        return null;
+        return categoriaRepository.findAll();
     }
 
     @Override

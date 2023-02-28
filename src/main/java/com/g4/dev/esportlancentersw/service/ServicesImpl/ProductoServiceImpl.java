@@ -106,4 +106,9 @@ public class ProductoServiceImpl implements IProductoService {
         productoRepository.save(productFound);
         return true;
     }
+
+    @Override
+    public List<Producto> findByAnyName(String nom) {
+        return productoRepository.findByNombreContainingIgnoreCase(nom);
+    }
 }
