@@ -16,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
 
 @Configuration
 @EnableWebSecurity
@@ -54,7 +55,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable()
-                .authorizeRequests().antMatchers("/auth/login" ,"/reportes/**").permitAll()
+                .authorizeRequests().antMatchers("/auth/login" ,"/reportes/**", "/ws/**").permitAll()
 
                 .anyRequest().authenticated()
                 .and()
