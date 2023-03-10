@@ -49,6 +49,16 @@ public class OrdenadorServiceImpl implements IOrdenadorService {
     }
 
     @Override
+    public Optional<String> findDireccionMacFromId(Long id) {
+        Optional<String> macFromId = ordenadorRepository.getDireccionMacFromId(id);
+
+        if (macFromId.isEmpty()){
+            throw  new NotFoundException("Ordenador no encontrado con ese id");
+        }
+        return macFromId;
+    }
+
+    @Override
     public Optional<Ordenador> buscarEntidad(Long id) {
         Optional<Ordenador> foundedMachine = ordenadorRepository.findById(id);
         if (foundedMachine.isEmpty()){

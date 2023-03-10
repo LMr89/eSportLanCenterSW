@@ -5,6 +5,7 @@ import com.g4.dev.esportlancentersw.service.IMainService;
 import org.aspectj.weaver.ast.Or;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IOrdenadorService extends IMainService<Ordenador> {
 
@@ -14,5 +15,7 @@ public interface IOrdenadorService extends IMainService<Ordenador> {
     List<Ordenador> ordenadoresEnMantenimiento();
 
     boolean existsById(long id);
+
+    Optional<String> findDireccionMacFromId(Long id);
 
 }

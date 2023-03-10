@@ -72,4 +72,14 @@ public class ValidationMessageConstants {
 
     public static final String PAGINA_WEB_MAL_FORMADA = "Se ha ingresado una url web no valida";
 
+    public static final String MAC_ORDENADOR = "La direccion mac no puede estar vacia";
+    public static final String MAC_ORDENADOR_NO_VALIDO = "La direccion MAC tiene un formato invalido" ;
+
+    //Alquiler
+    public static final String CLIENTE_NO_ENCONTRADO_EN_ALQUILER = "Es necesario establecer un cliente en el alquiler" ;
+    public static final String ORDENADOR_NO_ENCONTRADO_EN_ALQUILER = "Es necesario especificar el ordenador a alquilar";
+    public static final String TIEMPO_NO_EN_ALQUILER = "Es necesario especificar el tiempo de alquiler";
+    public static final String MONTO_NO_EN_ALQUILER = "Es necesario especificar el monto del alquiler";
+    public static final String MIN_TIEMPO_ALQUILER = "El tiempo minimo de alquiler es de 30 minutos" ;
+    public static final String MONTO_MINIMO_ALQUILER = "El monto no debe ser menor a los 2 soles";
 }
