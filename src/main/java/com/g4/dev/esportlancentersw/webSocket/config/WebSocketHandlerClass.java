@@ -1,5 +1,6 @@
 package com.g4.dev.esportlancentersw.webSocket.config;
 
+import com.g4.dev.esportlancentersw.webSocket.SessionsUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -10,16 +11,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-
 @Component
 public class WebSocketHandlerClass implements WebSocketHandler {
     private  final Logger webSocketLogger = LogManager.getLogger(WebSocketHandlerClass.class);
-    public static final Map<String, WebSocketSession> sesionesOrdenadores ;
 
-    static {
-        sesionesOrdenadores =
-        new ConcurrentHashMap<>();
-    }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -28,7 +23,7 @@ public class WebSocketHandlerClass implements WebSocketHandler {
                 .getQuery()
                 .replace("clientMac=","");
         webSocketLogger.info("Conexion establecida del cliente: "  + macAddress);
-        sesionesOrdenadores.put(macAddress, session);
+        SessionsUtil.sessionMap.put(macAddress, session);
 
         session.sendMessage(new TextMessage("Hola desde el servidor web socket spring boot"));
 
@@ -51,7 +46,7 @@ public class WebSocketHandlerClass implements WebSocketHandler {
                 .getQuery()
                 .replace("clientMac=","");
 
-        sesionesOrdenadores.remove(macAddress);
+        SessionsUtil.sessionMap.remove(macAddress);
     }
 
     @Override
@@ -60,7 +55,7 @@ public class WebSocketHandlerClass implements WebSocketHandler {
     }
 
     public void sendMessageToOrdenador(String clienteMac, String message) throws IOException {
-        WebSocketSession session = sesionesOrdenadores.get(clienteMac);
+        WebSocketSession session = SessionsUtil.sessionMap.get(clienteMac);
         if (session != null) {
             session.sendMessage(new TextMessage(message));
         }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.IOException;
 import java.util.*;
 
 @RestControllerAdvice
@@ -103,6 +104,14 @@ public class ControllerAdvice {
         ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.INTERNAL_SERVER_ERROR,
                 Collections.singletonList(ExceptionsMessageConstants.INTERNAL_SERVER_ERROR_MSG));
 
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(dto, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<ErrorResponseDTO> IOExceptionHandler(IOException ex) {
+        ErrorResponseDTO dto = ErrorResponseDTO.builQuickResponse(HttpStatus.INTERNAL_SERVER_ERROR,
+                Collections.singletonList(ExceptionsMessageConstants.INTERNAL_SERVER_ERROR_MSG));
         log.error(ex.getMessage());
         return new ResponseEntity<>(dto, HttpStatus.INTERNAL_SERVER_ERROR);
     }

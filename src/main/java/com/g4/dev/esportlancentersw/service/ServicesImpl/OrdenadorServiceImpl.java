@@ -44,6 +44,15 @@ public class OrdenadorServiceImpl implements IOrdenadorService {
     }
 
     @Override
+    public List<Ordenador> ordenadoresEnLinea() {
+        return ordenadorRepository
+                .findAll()
+                .stream()
+                .filter(Ordenador::getMantenimiento)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public boolean existsById(long id) {
         return ordenadorRepository.existsById(id);
     }

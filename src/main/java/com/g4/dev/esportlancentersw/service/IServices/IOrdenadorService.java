@@ -13,7 +13,7 @@ public interface IOrdenadorService extends IMainService<Ordenador> {
     void levantarMantenimiento(long id);
 
     List<Ordenador> ordenadoresEnMantenimiento();
-
+    List<Ordenador> ordenadoresEnLinea();
     boolean existsById(long id);
 
     Optional<String> findDireccionMacFromId(Long id);
